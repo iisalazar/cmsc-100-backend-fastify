@@ -1,34 +1,16 @@
-const fastify = require('fastify');
+const { build } = require('./app');
 
-
-// initialize our fastify server
-const server = fastify({
-  logger: true,
-  trustProxy: true
-});
-
-// access root address => localhost:<port>/ 
-server.get('/', {
-  /*
-  *
-  * @param (*) req - this is the request parameter that is sent by the client
-  * 
-  */
-  handler: async (req) => {
-    console.log(req);
-    // response in JSON format
-    return { success: true }
-  }
-})
-
-
-// start server
+/*
+* starts the application
+*/
 const start = async () => {
+  // calls to build an app
+  const app = await build();
   // get port from environment variable
   const port = parseInt(process.env.PORT || '8080');
   const address = '0.0.0.0';
 
-  const addr = await server.listen(port, address);
+  const addr = await app.listen(port, address);
   console.log(`Listening on ${address}:${port}`);
 }
 

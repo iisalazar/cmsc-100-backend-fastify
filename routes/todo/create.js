@@ -21,7 +21,7 @@ exports.create = app => {
       const { body } = req;
       // get text and done with default false from body, regardless if it has
       // an object value or null, which makes it return an empty object
-      const { text, done = false } = body || {};
+      const { text, done = false } = body;
       
       // get filename
       const filename = join(__dirname, '../../database.json');
@@ -44,7 +44,7 @@ exports.create = app => {
       writeFileSync(filename, newDatabaseStringContent, encoding);
 
       return {
-        succes: true,
+        success: true,
         data
       }
 

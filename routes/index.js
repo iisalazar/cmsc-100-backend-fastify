@@ -1,9 +1,10 @@
+const { todo } = require('./todo');
 /*
 * initilize all the routes
 * @param (*) app
 */
 
-exports.route = (app) => {
+exports.routes = (app) => {
   // access root address -> http://localhost:<port>/
   app.get('/', {
     /*
@@ -17,4 +18,5 @@ exports.route = (app) => {
       return { success: true }
     }
   })
+  todo(app);
 }

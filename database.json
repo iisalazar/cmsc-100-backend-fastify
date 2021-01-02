@@ -1,3 +1,11 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": "70cd15b1-3c4a-4dca-8409-b06da1f92128",
+      "text": "This is a todo",
+      "done": false,
+      "dateCreated": 1609585109337,
+      "dateUpdated": 1609585109337
+    }
+  ]
 }

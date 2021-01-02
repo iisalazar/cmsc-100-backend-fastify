@@ -1,6 +1,6 @@
 const { v4: uuid } = require('uuid');
-const { readFileSync, writeFileSync, readFile } = require('fs');
-
+const { readFileSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
 /**
  * this is the route for creating todos
@@ -18,13 +18,13 @@ exports.create = app => {
     handler: async (req, res) => {
       // create a unique identifier
       const id = uuid();
-      const { body } = request;
+      const { body } = req;
       // get text and done with default false from body, regardless if it has
       // an object value or null, which makes it return an empty object
       const { text, done = false } = body || {};
       
       // get filename
-      const filename = '../../database.json';
+      const filename = join(__dirname, '../../database.json');
       const encoding = 'utf8';
       const databaseStringContent = readFileSync(filename, encoding);
       const database = JSON.parse(databaseStringContent);
@@ -41,7 +41,7 @@ exports.create = app => {
       // added and null and 2 when stringify-ing the object 
       // so that the JSON file looks visually pleasing
       const newDatabaseStringContent = JSON.stringify(database, null, 2);
-      writeFileSync(filename, newDatabaseStringContent, encdoing);
+      writeFileSync(filename, newDatabaseStringContent, encoding);
 
       return {
         succes: true,

@@ -57,17 +57,11 @@ describe('for the route for root (/)', () => {
       text.should.equal('This is a todo');
       done.should.equal(false);
 
-      // const todos = getTodos(filename, encoding);
-      const databaseStringContent = readFileSync(filename, encoding);
-      const database = JSON.parse(databaseStringContent);
-
-      // check if the data was saved
-      // todos.findIndex(todo => todo.id === id);
-
-      const index = database.todos.findIndex(todo => todo.id === id);
+      const todos = getTodos(filename, encoding);
+      const index = todos.findIndex(todo => todo.id === id);
       
       index.should.not.equal(-1);
-      const { text: textDatabase, done: doneDatabase } = database.todos[index];
+      const { text: textDatabase, done: doneDatabase } = todos[index];
       text.should.equal(textDatabase);
       done.should.equal(doneDatabase);
       // save id for cleaning
@@ -96,17 +90,11 @@ describe('for the route for root (/)', () => {
       done.should.equal(false);
 
       
-      // const todos = getTodos(filename, encoding);
-      const databaseStringContent = readFileSync(filename, encoding);
-      const database = JSON.parse(databaseStringContent);
-
-      // check if the data was saved
-      // todos.findIndex(todo => todo.id === id);
-
-      const index = database.todos.findIndex(todo => todo.id === id);
+      const todos = getTodos(filename, encoding);
+      const index = todos.findIndex(todo => todo.id === id);
       
       index.should.not.equal(-1);
-      const { text: textDatabase, done: doneDatabase } = database.todos[index];
+      const { text: textDatabase, done: doneDatabase } = todos[index];
       text.should.equal(textDatabase);
       done.should.equal(doneDatabase);
       // save id for cleaning

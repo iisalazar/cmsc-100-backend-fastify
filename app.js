@@ -1,6 +1,7 @@
 // app factory
 
 const fastify = require('fastify');
+const { rooutes } = require('./routes');
 
 /*
   @param ({ logger: boolean, trusyProxy: boolean }) options
@@ -12,18 +13,7 @@ exports.build = async (options = { logger: true, trustProxy: true }) => {
   const app = fastify(options);
 
 
-  app.get('/', {
-    /*
-    *
-    * @param (*) req - this is the request parameter that is sent by the client
-    * 
-    */
-    handler: async (req) => {
-      console.log(req);
-      // response in JSON format
-      return { success: true }
-    }
-  })
+  
 
   return app;
 }

@@ -18,19 +18,19 @@ describe('for the route for root (/)', () => {
     app = await build();
   })
 
-  // after(async () => {
-  //   const todos = getTodos(filename, encoding);
-  //   for (const id of ids) {
-  //     console.log("Todos", todos);
-  //     const index = todos.findIndex(todo => todo.id === id);
+  after(async () => {
+    const todos = getTodos(filename, encoding);
+    for (const id of ids) {
+      console.log("Todos", todos);
+      const index = todos.findIndex(todo => todo.id === id);
 
-  //     // delete the id
-  //     if (index >= 0) {
-  //       todos.splice(index, 1);
-  //     }
-  //     writeFileSync(filename, JSON.stringify({ todos }, null, 2), encoding);
-  //   }
-  // });
+      // delete the id
+      if (index >= 0) {
+        todos.splice(index, 1);
+      }
+      writeFileSync(filename, JSON.stringify({ todos }, null, 2), encoding);
+    }
+  });
 
   /**
    * happy path: when users are doing something expectedly.

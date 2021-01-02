@@ -74,37 +74,42 @@ describe('for the route for root (/)', () => {
       ids.push(id);
     })
   
-  // // another happy path, but with no passed "done"
-  // it('it should return { success: true, data: ( new todo object )} and has a status code of 200 when called using POST even if we don\'t provide the done property. Default of done should be false',
-  //   async () => {
-  //     const response = await app.inject({
-  //       method: "POST",
-  //       url: "/todo",
-  //       payload: {
-  //         text: 'This is a todo 2'
-  //       }
-  //     });
+  // another happy path, but with no passed "done"
+  it('it should return { success: true, data: ( new todo object )} and has a status code of 200 when called using POST even if we don\'t provide the done property. Default of done should be false',
+    async () => {
+      const response = await app.inject({
+        method: "POST",
+        url: "/todo",
+        payload: {
+          text: 'This is a todo 2'
+        }
+      });
 
-  //     const payload = response.json();
-  //     const { success, data } = payload;
-  //     const { statusCode } = response;
-  //     const { text, done, id } = data;
+      const payload = response.json();
+      const { success, data } = payload;
+      const { statusCode } = response;
+      const { text, done, id } = data;
 
-  //     success.should.equal(true);
-  //     statusCode.should.equal(200);
-  //     text.should.equal('This is a todo 2');
-  //     done.should.equal(false);
+      success.should.equal(true);
+      statusCode.should.equal(200);
+      text.should.equal('This is a todo 2');
+      done.should.equal(false);
 
       
-  //     const todos = getTodos(filename, encoding);
+      // const todos = getTodos(filename, encoding);
+      const databaseStringContent = readFileSync(filename, encoding);
+      const database = JSON.parse(databaseStringContent);
 
-  //     // check if the data was saved
-  //     const index = todos.findIndex(todo => todo.id === id);
-  //     index.should.not.equal(-1);
-  //     const { text: textDatabase, done: doneDatabase } = todos[index];
-  //     text.should.equal(textDatabase);
-  //     done.should.equal(doneDatabase);
-  //     // save id for cleaning
-  //     ids.push(id);
-  //   });
+      // check if the data was saved
+      // todos.findIndex(todo => todo.id === id);
+
+      const index = database.todos.findIndex(todo => todo.id === id);
+      
+      index.should.not.equal(-1);
+      const { text: textDatabase, done: doneDatabase } = database.todos[index];
+      text.should.equal(textDatabase);
+      done.should.equal(doneDatabase);
+      // save id for cleaning
+      ids.push(id);
+    });
 })
